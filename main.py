@@ -44,19 +44,20 @@ from fastapi.responses import Response
 from twilio.twiml.voice_response import VoiceResponse
 
 app = FastAPI()
+response = VoiceResponse()
+# form = await request.form()
+# print("Webhook hit! Form data:", dict(form))
 
 
 @app.get("/")
 async def read_root():
-    return {"message": "Welcome to FastAPI!"}
+    response.say("Hello! This is a test.", voice="alice")
+    return Response(content=str(response), media_type="application/xml")
   
 
 @app.post("/voice")
 async def voice(request: Request):
-    form = await request.form()
-    print("Webhook hit! Form data:", dict(form))
 
-    response = VoiceResponse()
     response.say("Hello! This is a test.", voice="alice")
     return Response(content=str(response), media_type="application/xml")
     
