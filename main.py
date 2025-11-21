@@ -19,10 +19,16 @@ gather_first = Gather(
 )
 
 from openai import OpenAI  # official SDK
+from dotenv import load_dotenv
+
+load_dotenv()
 
 API_KEY = os.getenv("OPENAI_API_KEY")
+if not API_KEY:
+    raise ValueError("OPENAI_API_KEY is not set!")
 
 client = OpenAI(api_key=API_KEY)
+print(API_KEY)
 
 def classify_text(text: str, model: str = "gpt-4-turbo"):
     """
