@@ -20,7 +20,7 @@ gather_first = Gather(
 @app.post("/voice")
 async def voice(request: Request):
 
-
+    print("Call recived ")
     gather_first.say("Hello! Do you want to make a appintment?", voice="alice")
     response_first.append(gather_first)
     return Response(content=str(response_first), media_type="application/xml")
